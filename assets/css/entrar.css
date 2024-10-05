@@ -1,0 +1,102 @@
+body {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: #f8f9fa;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+    border-radius: 30px;
+}
+
+.btn-primary {
+    border-radius: 30px;
+    background-color: #7c25f8;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #6207e3;
+}
+
+.social-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    background-color: #eee;
+    color: black;
+    text-align: center;
+}
+
+.social-btn i {
+    margin-right: 8px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.divider::before {
+    margin-right: .25em;
+}
+
+.divider::after {
+    margin-left: .25em;
+}
+
+.header{
+    height: 60px;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    margin-top: auto;
+    top:0
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: white;
+}
+
+.social-btn {
+    width: 100%; /* Mantém o botão com largura total */
+    margin-bottom: 15px;
+    border-radius: 30px;
+    background-color: #eee;
+    color: black;
+    text-align: center;
+    white-space: break-word; /* Impede que o texto quebre em várias linhas */
+    overflow: hidden; /* Impede que o texto ultrapasse o botão */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    display: inline-block; /* Ajusta para que o botão respeite o conteúdo */
+    padding: 10px 15px; /* Ajusta o espaçamento interno do botão */
+}
+
+.social-btn i {
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Espaçamento para que o conteúdo não fique escondido atrás do header fixo */
+body {
+    padding-top: 200px; /* Ajuste este valor de acordo com a altura do cabeçalho */
+}
+
+.navbar-transparente {
+    background-color: rgba(0,0,0,0.7); /* Transparente para destacar o conteúdo */
+}
