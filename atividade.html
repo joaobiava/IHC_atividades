@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercício js</title>
+</head>
+<body>
+    <form id="sim">
+        <label for="text">primeiro número</label>
+        <input type="text" name="num1" id="num1">
+        <label for="text">Segundo número</label>
+        <input type="text" name="num2" id="num2">
+        <button onclick="verificaMaior()">verifica aí, clica</button>
+        <p id="mostra-resultado"></p>
+    </form>
+
+    <br>
+
+    <form id="notas">
+        <label for="text">insira sua nota</label>
+        <input type="text" name="nota" id="nota">
+        <button onclick="MostrarNota()">verifique sua aprovação</button>
+    </form>
+
+    <br>
+
+    <form onsubmit="event.preventDefault()">
+        <label for="text">insira vários números</label>
+        <input type="number" id="numero">
+        <button onclick="adicionarNumero()">após cada número, me clique</button>
+        <button onclick="media()">mostrar a media dos numeros</button>
+    </form>
+
+    <br>
+
+    <form>
+        <label for="text">insira uma letra</label>
+        <input type="text" id="ab">
+        <button onclick="letra()">clique aqui</button>
+    </form>
+
+    <br>
+
+    <form onsubmit="event.preventDefault()">
+        <label for="text">insira o numero de colunas</label>
+        <input type="number" id="colunas">
+        <label for="text">insira o numero de linhas</label>
+        <input type="number" id="linhas">
+        <label for="text">selecione os valores que queira</label>
+        <input type="number" id="valores">
+        <button onclick="SomaMatriz()">clica aí meu</button>
+    </form>
+
+    <form>
+        <button id="op1">Opção 1</button>
+        <button id="op2">Opção 2</button>
+        <button id="op3">Opção 3</button>
+        <button id="op4">Opção 4</button>
+    </form>
+    
+</body>
+<script>
+    function verificaMaior(){
+        let num1 = parseInt(document.getElementById('num1').value);
+        let num2 = parseInt(document.getElementById('num2').value);
+    
+        if(num1 > num2){
+            alert("num1 é maior");
+        } else{
+            alert("num2 é maior");
+        }
+    }
+
+    function MostrarNota(){
+        let nota = parseInt(document.getElementById('nota').value);
+
+        if(nota < 0 || nota > 10){
+            alert('sua nota deve ser entre 0 a 10');
+            return
+        }
+
+        if(nota < 6){
+            alert('reptovado')
+        } else if(nota >= 6 && nota < 8){
+            alert('Aprovado')
+        } else {
+            alert('aprovado com louvor')
+        }
+    }
+
+    let numeros = [];
+
+    function adicionarNumero(){
+        let numero = parseInt(document.getElementById('numero').value);
+        numeros.push(numero)
+        alert(`o número ${numero} foi inserido no vetor`)
+        document.getElementById('numero').value = '';
+    }
+
+    function media(){
+        let total = 0;
+        for(let i=0; i<numeros.length; i++){
+            total += numeros[i];
+        }
+        let resultado = total/numeros.length
+        alert(`a média é ${resultado}`)
+    }
+
+    function letra(){
+        let letra = document.getElementById('ab').value;
+        if(letra == 'a'){
+            alert('A')
+        } else if(letra == 'b'){
+            alert('B')
+        } else{
+            alert('outra letra')
+        }
+    }
+
+    function SomaMatriz(){
+        const somaMatriz = (m) => {
+            let soma = 0;
+            
+            m.forEach(linha => {
+                linha.forEach(v => soma += parseFloat(v));
+            });
+
+            return soma
+        }
+
+        const matriz = [[3, 5, 1],
+                        [2, 1, 1],
+                        [3, 1, 1]];
+
+        window.alert(somaMatriz(matriz));
+    }
+
+    function fatorial(){
+        const fatorial = (x) => {
+            let result = 1;
+
+            while(x > 0){
+                result *= x;
+                x--;
+            }
+
+            return result;
+        }
+
+        window.alert(fatorial(3));
+    }
+
+    function opcoes_escolhidas(){
+        window.alert("Escolha uma opção de 1 a 3.")
+
+        const btn1 = document.getElementById("op1")
+        btn1.addEventListener('click', (event) => {
+            window.alert("Opção 1 escolhida")
+        })
+
+        const btn2 = document.getElementById("op2")
+        btn2.addEventListener('click', (event) => {
+            window.alert("Opção 2 escolhida")
+        })
+
+        const btn3 = document.getElementById("op3")
+        btn3.addEventListener('click', (event) => {
+            window.alert("Opção 3 escolhida")
+        })
+
+        const btn4 = document.getElementById("op4")
+        btn4.addEventListener('click', (event) => {
+            window.alert("Opção inválida escolhida")
+        })
+    }
+
+    function maiorValor(){
+        const maiorVal = (vet) => {
+            let maior = vet[0];
+
+            for(el of vet){
+                if(el > maior)
+                    maior = el;
+            }
+
+            return maior;
+        }
+
+        window.alert(maiorVal([4, 3, 2, 9, 2]));
+    }
+
+    function mediaMatriz(){
+        const mediaMatriz = (m) => {
+            let soma = 0;
+            
+            m.forEach(linha => {
+                linha.forEach(v => soma += parseFloat(v));
+            });
+
+            return soma / (m.length * m[0].length);
+        }
+
+        const matriz = [[3, 5, 1],
+                        [2, 1, 1],
+                        [3, 1, 1]];
+
+        window.alert(mediaMatriz(matriz));
+    }
+</script>
+</html>
