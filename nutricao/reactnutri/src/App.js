@@ -3,6 +3,7 @@ import './estilo.css';
 
 function App(){
   const [nutri, setNutri] = useState([]);
+  const [pokemon, setPokemon] = useState([]);
 
   useEffect(()=>{
     let url = 'https://sujeitoprogramador.com/rn-api/?api=posts';
@@ -13,11 +14,11 @@ function App(){
   }, []);
 
   useEffect(()=>{
-    let url = 'http://api.pokemon.dev:8080/api';
+    let url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 
     fetch(url)
     .then((dados)=>dados.json())
-    .then((json)=>setNutri(json))
+    .then((json)=>setPokemon(json))
   }, []);
 
   return(
@@ -43,21 +44,29 @@ function App(){
         })}
       </div>
 
-      <div>
-      {nutri.map((item)=>{
-          return(
-            <article key={item.id} className='post'>
-              <strong className='titulo'>{item.titulo}</strong>
+      <div className="container">
+        {pokemon && (
+          <article key={pokemon.id} className="post">
+            <strong className="titulo">Nome: {pokemon.name}</strong>
 
-              <em>Categoria: {item.categoria}</em>
+            <em>ID: {pokemon.id}</em>
+            <br />
+            <em>Tipo: {pokemon.types.map((type) => type.type.name).join(', ')}</em>
 
-              <img src={item.capa} alt={item.titulo} className='capa'/>
+            <img
+              src={pokemon.sprites.front_default}
+              alt={pokemon.name}
+              className="capa"
+            />
 
-              <p className='subtitulo'>{item.subtitulo}</p>
-
-            </article>
-          );
-        })}
+            <p className="subtitulo">Habilidades:</p>
+            <ul>
+              {pokemon.abilities.map((ability, index) => (
+                <li key={index}>{ability.ability.name}</li>
+              ))}
+            </ul>
+          </article>
+        )}
       </div>
     </div>
   )
