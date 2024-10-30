@@ -3,7 +3,7 @@ import './estilo.css';
 
 function App(){
   const [nutri, setNutri] = useState([]);
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(()=>{
     let url = 'https://sujeitoprogramador.com/rn-api/?api=posts';
@@ -13,12 +13,20 @@ function App(){
     .then((json)=>setNutri(json))
   }, []);
 
-  useEffect(()=>{
-    let url = 'https://pokeapi.co/api/v2/pokemon/ditto';
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      const url = 'https://pokeapi.co/api/v2/pokemon?limit=20'; // Ajuste o limite conforme necessário
 
-    fetch(url)
-    .then((dados)=>dados.json())
-    .then((json)=>setPokemon(json))
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setPokemons(data.results); // Armazena a lista básica de Pokémon
+      } catch (error) {
+        console.error('Erro ao buscar dados dos Pokémon:', error);
+      }
+    };
+
+    fetchPokemons();
   }, []);
 
   return(
@@ -45,31 +53,22 @@ function App(){
       </div>
 
       <div className="container">
-        {pokemon && (
-          <article key={pokemon.id} className="post">
-            <strong className="titulo">Nome: {pokemon.name}</strong>
-
-            <em>ID: {pokemon.id}</em>
-            <br />
-            <em>Tipo: {pokemon.types.map((type) => type.type.name).join(', ')}</em>
-
-            <img
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              className="capa"
-            />
-
-            <p className="subtitulo">Habilidades:</p>
-            <ul>
-              {pokemon.abilities.map((ability, index) => (
-                <li key={index}>{ability.ability.name}</li>
-              ))}
-            </ul>
-          </article>
-        )}
-      </div>
+      <header>
+        <strong>Lista de Pokémon</strong>
+      </header>
+      
+      {pokemons.map((pokemon, index) => (
+        <article key={index} className="post">
+          <strong className="titulo">Nome: {pokemon.name}</strong>
+          <br />
+          <a href={pokemon.url} target="_blank" rel="noopener noreferrer">
+            Ver detalhes
+          </a>
+        </article>
+      ))}
     </div>
-  )
+    </div>
+  );
 }
 
 export default App;
